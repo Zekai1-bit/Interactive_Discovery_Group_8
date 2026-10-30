@@ -22,6 +22,8 @@ const UI = {
       toasts: document.getElementById('toast-region'),
       dialog: document.getElementById('continue-dialog')
     };
+
+    this.els.board.inert = true;
     this.els.title.textContent = story.title;
     document.title = story.title;
 
