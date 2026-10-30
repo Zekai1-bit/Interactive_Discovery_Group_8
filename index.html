@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Curious Case of the Empty Frame</title>
+  <meta name="description" content="An interactive discovery mystery: you are a picture frame that wakes up empty at 3:12 a.m.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/scenes.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <script src="js/state.js" defer></script>
+  <script src="js/interactions.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/scenes.js" defer></script>
+</head>
+<body class="theme-mantel">
+  <a class="skip-link" href="#scene-container">Skip to the scene</a>
+
+  <header class="topbar">
+    <p class="topbar__title" id="game-title">The Curious Case of the Empty Frame</p>
+
+    <nav class="topbar__nav" aria-label="Investigation tools">
+      <ol class="progress" id="progress" aria-label="Investigation progress"></ol>
+
+      <a class="topbar__link" href="credits.html">Credits</a>
+
+      <button class="icon-btn icon-btn--labelled" id="audio-toggle" type="button" aria-pressed="false" aria-label="Ambient sound: off">
+        <svg class="icon-btn__icon icon-btn__icon--off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="icon-btn__icon icon-btn__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        <span class="icon-btn__text" aria-hidden="true">Sound</span>
+      </button>
+
+      <button class="icon-btn icon-btn--labelled icon-btn--journal" id="journal-toggle" type="button" aria-controls="evidence-board" aria-expanded="false" aria-label="Open the evidence board">
+        <svg class="icon-btn__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="icon-btn__text" aria-hidden="true">Board</span>
+        <span class="icon-btn__badge" id="journal-count" aria-hidden="true">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="stage-wrap">
+    <div id="scene-container" class="scene-container" tabindex="-1" aria-live="polite">
+      <p class="loading">Waking up…</p>
+    </div>
+  </main>
+
+  <div class="board-backdrop" id="board-backdrop" hidden></div>
+  <aside class="board" id="evidence-board" role="dialog" aria-modal="true" aria-labelledby="board-title" inert>
+    <header class="board__header">
+      <h2 class="board__title" id="board-title">Evidence Board</h2>
+      <button class="icon-btn board__close" id="board-close" type="button" aria-label="Close the evidence board">
+        <svg class="icon-btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+
+    <section class="board__section">
+      <h3 class="board__heading">Path</h3>
+      <p class="board__path" id="board-path"></p>
+    </section>
+
+    <section class="board__section">
+      <h3 class="board__heading">Rooms</h3>
+      <ul class="board__rooms" id="board-rooms"></ul>
+    </section>
+
+    <section class="board__section">
+      <h3 class="board__heading">Clues &amp; evidence</h3>
+      <ul class="board__clues" id="board-clues"></ul>
+    </section>
+
+    <section class="board__section">
+      <h3 class="board__heading">Discoveries</h3>
+      <ol class="board__log" id="board-log" aria-live="polite"></ol>
+    </section>
+  </aside>
+
+  <dialog class="continue" id="continue-dialog" aria-labelledby="continue-title">
+    <h2 class="continue__title" id="continue-title">Continue your investigation?</h2>
+    <p class="continue__body" id="continue-body"></p>
+    <div class="continue__actions">
+      <button class="btn btn--primary" id="continue-yes" type="button">Continue</button>
+      <button class="btn btn--ghost" id="continue-no" type="button">Start over</button>
+    </div>
+  </dialog>
+
+  <div class="transition-overlay" id="transition-overlay" aria-hidden="true">
+    <div class="transition-overlay__grain"></div>
+    <div class="transition-overlay__flicker"></div>
+  </div>
+
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+</body>
+</html>

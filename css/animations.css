@@ -1,0 +1,303 @@
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-pop {
+  0% { opacity: 0; transform: scale(0.96); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes journal-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 var(--glow); }
+  40% { transform: scale(1.18); box-shadow: 0 0 0 10px transparent; }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 transparent; }
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-6%, 4%); }
+  40% { transform: translate(5%, -3%); }
+  60% { transform: translate(-3%, -6%); }
+  80% { transform: translate(6%, 5%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.1; }
+  15% { opacity: 0.9; }
+  25% { opacity: 0.2; }
+  40% { opacity: 1; }
+  55% { opacity: 0.35; }
+  70% { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+
+@keyframes pin-in {
+  from { opacity: 0; transform: translateY(-10px) rotate(-4deg) scale(0.96); }
+  to { opacity: 1; }
+}
+
+@keyframes eyes-open {
+  0% { transform: scaleY(0.1); opacity: 0; box-shadow: 0 0 0 transparent; }
+  60% { transform: scaleY(1.1); opacity: 1; }
+  100% { transform: scaleY(1); box-shadow: 0 0 24px var(--glow); }
+}
+
+@keyframes lamp-on {
+  0% { filter: brightness(0.4); }
+  20% { filter: brightness(1.4); }
+  30% { filter: brightness(0.7); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes frame-fill {
+  0% { opacity: 0; transform: scale(0.92) rotate(-1deg); }
+  70% { opacity: 1; transform: scale(1.02) rotate(0.3deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes polaroid-drop {
+  0% { opacity: 0; transform: translateY(-24px) rotate(-6deg); }
+  70% { opacity: 1; transform: translateY(3px) rotate(1deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.scene-container {
+  transition: opacity 400ms ease;
+}
+
+.scene-container.is-leaving {
+  opacity: 0;
+}
+
+.scene {
+  animation: fade-in 600ms ease both;
+}
+
+.transition-overlay {
+  transition: opacity 120ms linear;
+}
+
+.transition-overlay.is-active .transition-overlay__grain {
+  animation: grain 300ms steps(4) infinite;
+}
+
+.transition-overlay.is-active .transition-overlay__flicker {
+  animation: flicker 600ms linear both;
+}
+
+.typewriter__cursor {
+  animation: blink 900ms step-end infinite;
+}
+
+.obj.is-appearing {
+  animation: rise-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.obj.is-revealing .obj__reveal,
+.trail__item.is-revealing {
+  animation: reveal-pop 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.obj__cover {
+  transition: transform 350ms ease, opacity 350ms ease;
+}
+
+.obj:not(.is-revealed) .obj__trigger--peek:hover .obj__cover {
+  transform: translateY(-40%);
+}
+
+.theme-fork .obj.is-appearing .obj__icon {
+  animation: eyes-open 900ms ease both;
+}
+
+.scene--entry.is-lit .obj[data-id='lamp'] .obj__icon {
+  animation: lamp-on 700ms ease both;
+}
+
+.scene--entry::before {
+  transition: background 800ms ease;
+}
+
+.album__spot-label {
+  transition: filter 400ms ease, opacity 400ms ease;
+}
+
+.album__spot.is-examined {
+  animation: reveal-pop 400ms ease both;
+}
+
+.album__finding {
+  animation: rise-in 400ms ease both;
+}
+
+.trail__spot.is-wrong,
+.exit.is-denied {
+  animation: shake 420ms ease;
+}
+
+.timeline__item.is-revealing {
+  animation: polaroid-drop 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.final-frame.is-revealing {
+  animation: frame-fill 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.drag-item {
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease, box-shadow 250ms ease;
+}
+
+.drag-item.is-dragging {
+  transition: box-shadow 250ms ease;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.45);
+}
+
+.drag-item.is-lifted {
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1), opacity 650ms ease;
+}
+
+.obj__trigger,
+.trail__spot,
+.album__spot,
+.lens,
+.exit,
+.icon-btn,
+.btn,
+.sound-prompt {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease, opacity 220ms ease;
+}
+
+.obj:not(.is-revealed) .obj__trigger:hover,
+.obj:not(.is-revealed) .obj__trigger:focus-visible,
+.trail__spot:not(.is-found):hover,
+.album__spot:not(.is-examined):hover,
+.exit:not(.is-locked):hover,
+.exit:not(.is-locked):focus-visible,
+.btn:hover,
+.sound-prompt:hover,
+.sound-prompt:focus-visible {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 26px var(--glow);
+}
+
+.drag-item:not(.is-lifted):hover {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 30px var(--glow);
+}
+
+.lens:hover {
+  box-shadow: 0 0 0 3px var(--accent), 0 0 30px var(--glow);
+}
+
+.icon-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px var(--glow);
+}
+
+.fly-clone {
+  transition: transform 800ms cubic-bezier(0.55, -0.15, 0.7, 1), opacity 800ms ease;
+}
+
+.icon-btn--journal.is-pulsing {
+  animation: journal-pulse 650ms ease;
+}
+
+.board {
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.board-backdrop {
+  transition: opacity 300ms ease;
+}
+
+.board.is-open .board__room,
+.board.is-open .board__clue,
+.board.is-open .board__entry,
+.board.is-open .board__path {
+  animation: pin-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.board.is-open li:nth-child(1) { animation-delay: 120ms; }
+.board.is-open li:nth-child(2) { animation-delay: 170ms; }
+.board.is-open li:nth-child(3) { animation-delay: 220ms; }
+.board.is-open li:nth-child(4) { animation-delay: 270ms; }
+.board.is-open li:nth-child(5) { animation-delay: 320ms; }
+.board.is-open li:nth-child(6) { animation-delay: 370ms; }
+.board.is-open li:nth-child(7) { animation-delay: 420ms; }
+.board.is-open li:nth-child(8) { animation-delay: 470ms; }
+.board.is-open li:nth-child(9) { animation-delay: 520ms; }
+.board.is-open li:nth-child(10) { animation-delay: 570ms; }
+.board.is-open li:nth-child(n + 11) { animation-delay: 620ms; }
+
+.toast {
+  animation: toast-in 300ms ease both;
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+
+.toast.is-leaving {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.continue[open] {
+  animation: rise-in 350ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes attention-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px var(--accent), 0 0 0 0 var(--glow); }
+  50% { box-shadow: 0 0 0 2px var(--accent), 0 0 22px 6px var(--glow); }
+}
+
+.obj.is-new,
+.obj[data-id=lamp]:not(.is-revealed),
+.obj[data-id=the_note]:not(.is-revealed),
+.album__spot--3:not(.is-examined) {
+  animation: attention-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obj.is-new,
+  .obj.is-waiting,
+  .obj[data-id=lamp]:not(.is-revealed),
+  .obj[data-id=the_note]:not(.is-revealed),
+  .album__spot--3:not(.is-examined) {
+    animation: none !important;
+  }
+}

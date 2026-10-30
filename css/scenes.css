@@ -1,0 +1,165 @@
+.theme-mantel {
+  --bg: #0b1020;
+  --bg-2: #151c31;
+  --fg: #ebe4d3;
+  --muted: #959bb0;
+  --accent: #f2b45a;
+  --accent-ink: #1a1206;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(242, 180, 90, 0.2);
+  --glow: rgba(242, 180, 90, 0.45);
+  --texture:
+    radial-gradient(ellipse at 50% -20%, rgba(242, 180, 90, 0.1), transparent 55%),
+    radial-gradient(ellipse at 50% 130%, rgba(0, 0, 0, 0.9), transparent 60%);
+}
+
+.scene--entry::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 30%, transparent 10%, rgba(0, 0, 0, 0.55) 70%);
+  pointer-events: none;
+}
+
+.scene--entry.is-lit::before {
+  background:
+    radial-gradient(circle at 82% 8%, rgba(255, 196, 110, 0.32), transparent 45%),
+    radial-gradient(circle at 50% 30%, transparent 30%, rgba(0, 0, 0, 0.25) 80%);
+}
+
+.scene--entry .obj[data-id='lamp'] .obj__icon {
+  filter: grayscale(1) brightness(0.6);
+}
+
+.scene--entry.is-lit .obj[data-id='lamp'] .obj__icon {
+  filter: none;
+  box-shadow: 0 0 30px var(--glow);
+}
+
+.theme-archive {
+  --bg: #e7dabd;
+  --bg-2: #d8c8a6;
+  --fg: #35261a;
+  --muted: #76603f;
+  --accent: #8b3a1e;
+  --accent-ink: #fff5e3;
+  --card: rgba(255, 250, 238, 0.72);
+  --card-border: rgba(90, 60, 30, 0.25);
+  --glow: rgba(139, 58, 30, 0.3);
+  --shadow: 0 8px 20px rgba(90, 60, 30, 0.18);
+  --texture:
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(110, 75, 35, 0.28) 100%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(90, 60, 30, 0.07) 31px 32px);
+}
+
+.theme-archive .obj {
+  border-radius: 4px;
+}
+
+.theme-fork {
+  --bg: #0a0a0e;
+  --bg-2: #15151c;
+  --fg: #e7e5ea;
+  --muted: #8f8d99;
+  --accent: #e8d6ad;
+  --accent-ink: #18140b;
+  --accent-warm: #f0a15a;
+  --accent-cool: #8fb8e8;
+  --card: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --glow: rgba(232, 214, 173, 0.35);
+  --texture:
+    linear-gradient(90deg, rgba(240, 161, 90, 0.16), transparent 38%, transparent 62%, rgba(143, 184, 232, 0.16)),
+    radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.9), transparent 70%);
+}
+
+.theme-fork .obj--zone-left {
+  --accent: var(--accent-warm);
+  --glow: rgba(240, 161, 90, 0.45);
+  border-color: rgba(240, 161, 90, 0.35);
+}
+
+.theme-fork .obj--zone-right {
+  --accent: var(--accent-cool);
+  --glow: rgba(143, 184, 232, 0.45);
+  border-color: rgba(143, 184, 232, 0.35);
+}
+
+.theme-fork .exit:nth-child(1) {
+  --accent: var(--accent-warm);
+}
+
+.theme-fork .exit:nth-child(2) {
+  --accent: var(--accent-cool);
+}
+
+.theme-fork .exit:not(.is-locked) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.theme-kapi {
+  --bg: #1c2717;
+  --bg-2: #283521;
+  --fg: #f4ecdc;
+  --muted: #b5c1a0;
+  --accent: #e8c48f;
+  --accent-ink: #2a1d0e;
+  --card: rgba(244, 236, 220, 0.06);
+  --card-border: rgba(232, 196, 143, 0.25);
+  --glow: rgba(232, 196, 143, 0.45);
+  --texture:
+    radial-gradient(circle at 12% 18%, rgba(196, 232, 170, 0.16) 0 46px, transparent 47px),
+    radial-gradient(circle at 78% 12%, rgba(220, 240, 200, 0.12) 0 70px, transparent 71px),
+    radial-gradient(circle at 88% 58%, rgba(196, 232, 170, 0.1) 0 38px, transparent 39px),
+    radial-gradient(circle at 30% 70%, rgba(240, 230, 170, 0.08) 0 56px, transparent 57px),
+    linear-gradient(to top, rgba(110, 72, 40, 0.55), transparent 28%);
+}
+
+.theme-kapi .scene__title {
+  letter-spacing: -0.01em;
+}
+
+.theme-num {
+  --bg: #0d1521;
+  --bg-2: #18233a;
+  --fg: #e3e9f2;
+  --muted: #8fa0b6;
+  --accent: #c9d6e8;
+  --accent-ink: #0d1521;
+  --card: rgba(201, 214, 232, 0.06);
+  --card-border: rgba(201, 214, 232, 0.22);
+  --glow: rgba(170, 200, 240, 0.4);
+  --texture:
+    radial-gradient(circle at 86% 10%, rgba(230, 240, 255, 0.22) 0 34px, rgba(230, 240, 255, 0.05) 35px, transparent 140px),
+    linear-gradient(115deg, transparent 28%, rgba(200, 220, 255, 0.06) 28% 36%, transparent 36% 42%, rgba(200, 220, 255, 0.04) 42% 47%, transparent 47%);
+}
+
+.theme-num .obj {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.theme-dawn {
+  --bg: #f6e2d2;
+  --bg-2: #f0d2bd;
+  --fg: #3a231f;
+  --muted: #876155;
+  --accent: #d26c48;
+  --accent-ink: #fff7f0;
+  --card: rgba(255, 255, 255, 0.55);
+  --card-border: rgba(210, 108, 72, 0.25);
+  --glow: rgba(255, 170, 120, 0.5);
+  --shadow: 0 10px 24px rgba(120, 60, 40, 0.15);
+  --texture:
+    linear-gradient(180deg, #f6c4a2 0%, rgba(246, 226, 210, 0) 45%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.0) 0 60px, rgba(255, 240, 220, 0.25) 60px 64px);
+}
+
+.theme-dawn .obj--timeline {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}

@@ -1,0 +1,496 @@
+{
+  "title": "The Curious Case of the Empty Frame",
+  "audio": {
+    "src": null,
+    "files": {
+      "clock": "assets/audio/clock-tick.mp3",
+      "pageTurn": "assets/audio/page-turn.mp3",
+      "bell": "assets/audio/collect-bell.mp3",
+      "footsteps": "assets/audio/footsteps.mp3",
+      "purr": "assets/audio/cat-purr.mp3",
+      "musicBox": "assets/audio/music-box.mp3",
+      "lampClick": "assets/audio/lamp-click.mp3",
+      "whoosh": "assets/audio/transition-whoosh.mp3"
+    },
+    "ambience": {
+      "entry": { "file": "clock", "loop": true, "gain": 0.3 },
+      "choice": { "file": "footsteps", "loop": false, "gain": 0.45 },
+      "heights-num": { "file": "purr", "loop": true, "gain": 0.4 },
+      "resolution": { "file": "musicBox", "loop": false, "gain": 0.35 }
+    },
+    "effects": {
+      "collect": { "file": "bell", "gain": 0.5 },
+      "reveal": { "file": "pageTurn", "gain": 0.6 },
+      "scentStep": { "file": "footsteps", "gain": 0.6, "duration": 1.6 },
+      "wrongOrder": { "file": null, "gain": 0.25 },
+      "lamp": { "file": "lampClick", "gain": 0.6 },
+      "sceneChange": { "file": "whoosh", "gain": 0.4 }
+    },
+    "prompt": {
+      "scene": "entry",
+      "label": "Turn sound on",
+      "onLabel": "Sound is on",
+      "loadingLabel": "Loading sounds…"
+    }
+  },
+  "ui": {
+    "continuePrompt": "You were last in {scene}. The house is still dark, and your windows are still empty.",
+    "progressLabels": ["The Mantel", "The Album", "The Hallway", "The Trail", "Dawn"],
+    "paths": {
+      "A": "Following Kapi, nose to the floor.",
+      "B": "Following Num, up in the high places.",
+      "none": "You have not chosen whose senses to borrow yet."
+    },
+    "unknownRoom": "Somewhere you have not been",
+    "emptyClues": "Nothing yet. Look closer.",
+    "emptyLog": "Your memory is as empty as your windows."
+  },
+  "scenes": [
+    {
+      "id": "entry",
+      "step": 0,
+      "kicker": "Scene 1 · 3:12 a.m.",
+      "title": "The Mantel",
+      "theme": "theme-mantel",
+      "image": "assets/images/scenes/scene-mantel.jpg",
+      "alt": "A single white candle burning in an iron holder against a dark stone wall.",
+      "credit": { "photographer": "Damir K", "url": "https://www.pexels.com/photo/elegant-candle-flame-in-dark-setting-33986498/" },
+      "narration": "3:12 a.m. The house is holding its breath. You are the frame on the mantel, silver and a little tarnished, hung exactly where every eye lands when someone walks in. For three years you have held the same photograph. Tonight you woke up light. Too light. Your glass is cold, and both of your windows are empty.",
+      "objects": [
+        {
+          "id": "lamp",
+          "type": "click-reveal",
+          "label": "The reading lamp",
+          "hint": "Click or press Space to switch it on",
+          "icon": "💡",
+          "reveal": "Click. Amber light spills across the mantel and the room rises out of the dark: the couch, the rug, a water bowl, a cat tree by the window. Nothing broken. Nothing forced open. Whoever did this lives here.",
+          "sceneClass": "is-lit"
+        },
+        {
+          "id": "glass",
+          "type": "hover-reveal",
+          "label": "Your own glass",
+          "hint": "Click or press Space to see your reflection",
+          "icon": "🪞",
+          "reveal": "You know what belongs in your two windows. Left: a puppy in a black bow tie, paws over a fence rail. Right: a grey kitten, held up like a prize. Both gone. Only the cream mat remains, with a small bite out of one edge."
+        },
+        {
+          "id": "dust_outline",
+          "type": "click-reveal",
+          "label": "A clean shape in the dust",
+          "hint": "Click or press Space to look closer",
+          "icon": "▭",
+          "requires": "lamp",
+          "reveal": "Right beneath you, the lamplight shows a clean rectangle in the dust of the mantel shelf, exactly the size of your photos. They were set down here gently, not snatched in a hurry. Then something small came back and carried them away.",
+          "collectible": true,
+          "boardLabel": "Dust outline under the frame",
+          "collectMessage": "A clean dust outline under the frame. The photos were set down gently, not snatched."
+        },
+        {
+          "id": "two_hairs",
+          "type": "click-reveal",
+          "label": "Something caught in your hinge",
+          "hint": "Click or press Space to look closer",
+          "icon": "🧵",
+          "requires": ["lamp", "dust_outline"],
+          "reveal": "Snagged in your back hinge, right above the dust outline: two hairs that do not match. One short, cream coloured and tightly curled. One long, silver and impossibly soft. Two different thieves, or two accomplices.",
+          "collectible": true,
+          "boardLabel": "Two mismatched hairs",
+          "collectMessage": "Two mismatched hairs in your hinge: one cream curl, one silver strand."
+        }
+      ],
+      "exits": [
+        {
+          "label": "Search the bookshelf",
+          "target": "archive",
+          "condition": "collected:two_hairs",
+          "lockedHint": "Something on the mantel only shows up in the light."
+        }
+      ]
+    },
+    {
+      "id": "archive",
+      "step": 1,
+      "kicker": "Scene 2 · 3:19 a.m.",
+      "title": "The Bookshelf Album",
+      "theme": "theme-archive",
+      "image": "assets/images/scenes/scene-archive.jpg",
+      "alt": "Rows of old leather-bound books on a wooden library shelf in low light.",
+      "credit": { "photographer": "Ruben Boekeloo", "url": "https://www.pexels.com/photo/historic-dublin-library-bookshelf-29626802/" },
+      "motif": {
+        "image": "assets/images/scenes/motif-album.jpg",
+        "alt": "",
+        "credit": { "photographer": "Radwan Menzer", "url": "https://www.pexels.com/photo/album-with-vintage-pictures-17790673/" }
+      },
+      "narration": "The family album lives on the second shelf, its spine cracked from being opened too often. Someone opened it again tonight. It lies flat on the shelf with the pages splayed, and a coaster beside it sits crooked, as if something small and heavy stepped on it on the way past.",
+      "objects": [
+        {
+          "id": "torn_corner",
+          "type": "magnifier",
+          "label": "The family album",
+          "hint": "Click or press Space on each spot to examine it",
+          "icon": "🔍",
+          "targets": [
+            { "id": "slot_groom", "label": "An empty slot, top left", "text": "Pencil beneath the empty slot reads: Kapi, first groom, he hated it. The photo corners are bent outward." },
+            { "id": "slot_birthday", "label": "An empty slot, bottom right", "text": "Pencil beneath this one reads: Num, first birthday, asleep on the tablecloth as usual. The slot is empty and dusted with silver fluff." },
+            { "id": "spine", "label": "A torn scrap in the spine", "text": "Wedged deep into the spine: a scrap of cream card." }
+          ],
+          "reveal": "Two photos are missing from the album. And the scrap in the spine is a corner of cream photo mat, your own mat, with one neat, rounded tooth mark.",
+          "collectible": true,
+          "boardLabel": "Torn corner of your mat",
+          "collectMessage": "A torn corner of your own mat, with a rounded tooth mark."
+        },
+        {
+          "id": "paw_prints",
+          "type": "drag",
+          "label": "The crooked coaster",
+          "hint": "Click or press Space to move it aside",
+          "icon": "🐾",
+          "reveal": "Under the coaster, printed in dried water: two sets of paw prints, side by side. One round and broad. One small and neat, toes tucked together. They did not sneak past each other. They walked here together.",
+          "collectible": true,
+          "boardLabel": "Two sets of paw prints",
+          "collectMessage": "Two sets of paw prints, one round and one small, walking side by side."
+        },
+        {
+          "id": "sticky_note",
+          "type": "click-reveal",
+          "label": "A sticky note on the shelf edge",
+          "hint": "Click or press Space to read it",
+          "icon": "🗒️",
+          "reveal": "In hurried handwriting, the human has written: print NEW photos for the frame!! The note is dated March. It is now October."
+        }
+      ],
+      "exits": [
+        {
+          "label": "Step into the hallway",
+          "target": "choice",
+          "condition": "collected:paw_prints",
+          "lockedHint": "That coaster is sitting a little too crooked."
+        },
+        {
+          "label": "Back to the mantel",
+          "target": "entry",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "choice",
+      "step": 2,
+      "kicker": "Scene 3 · 3:26 a.m.",
+      "title": "The Hallway Fork",
+      "theme": "theme-fork",
+      "image": "assets/images/scenes/scene-fork.jpg",
+      "alt": "A long, narrow hallway lit by a few dim lamps, fading into darkness.",
+      "credit": { "photographer": "Rahul", "url": "https://www.pexels.com/photo/photo-of-hallway-with-dim-lights-1023044/" },
+      "narration": "The hallway splits. Left: the kitchen, and the long low dark under the furniture. Right: the stairs, the shelves, the tops of things. A frame cannot walk. But you can borrow a pair of senses for the night, and you are not alone out here.",
+      "objects": [
+        {
+          "id": "eyes_kapi",
+          "type": "click-reveal",
+          "label": "Two eyes, low to the floor",
+          "hint": "Click or press Space to look closer",
+          "icon": "👀",
+          "delay": 1400,
+          "zone": "left",
+          "reveal": "Brown, round, wet-nosed. Kapi, the cockapoo with three years of cream curls, is lying in the kitchen doorway with his chin on his paws, pretending very hard to be asleep. His tail gives him away: thump. Thump."
+        },
+        {
+          "id": "eyes_num",
+          "type": "click-reveal",
+          "label": "Two eyes, high on the shelf",
+          "hint": "Click or press Space to look closer",
+          "icon": "👀",
+          "delay": 2800,
+          "zone": "right",
+          "reveal": "Green-gold and perfectly still. Num, silver and long-haired, two years old and certain she owns the house, sits on top of the bookcase, watching you as if you are the one who should explain yourself."
+        }
+      ],
+      "exits": [
+        {
+          "label": "Follow Kapi along the floor",
+          "target": "trail-kapi",
+          "setPath": "A",
+          "delay": 4200,
+          "condition": "collected:torn_corner",
+          "lockedHint": "Why suspect Kapi? The album might have teeth marks to show you."
+        },
+        {
+          "label": "Follow Num up to the heights",
+          "target": "heights-num",
+          "setPath": "B",
+          "delay": 4200,
+          "condition": "collected:two_hairs",
+          "lockedHint": "You have no reason to look up yet."
+        },
+        {
+          "label": "Back to the album",
+          "target": "archive",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "trail-kapi",
+      "step": 3,
+      "kicker": "Scene 4 · Following Kapi",
+      "title": "Floor Level",
+      "theme": "theme-kapi",
+      "image": "assets/images/scenes/scene-kapi.jpg",
+      "alt": "A stock photo of a curly apricot cockapoo standing in long grass on a hillside, tongue out.",
+      "caption": "Scene atmosphere only, not Kapi/Num",
+      "credit": { "photographer": "Oliver Morgan Media", "url": "https://www.pexels.com/photo/a-dog-standing-in-a-field-with-its-tongue-out-28183013/" },
+      "narration": "You sink down into the world Kapi lives in, where everything is a smell and every smell is a story. The floor is a map. Old trails are faint, like pencil. New ones are bright, like shouting. Somewhere down here is a trail barely an hour old, and it smells like you.",
+      "objects": [
+        {
+          "id": "scent_trail",
+          "type": "sequence",
+          "label": "The scent trail",
+          "hint": "Click or press Space on each trace, faintest to strongest",
+          "icon": "👃",
+          "wrongMessage": "Too strong to start here. Kapi tugs you back toward the faintest trace.",
+          "steps": [
+            {
+              "id": "kapi_now_photo",
+              "order": 3,
+              "label": "A blazing trail into his bed",
+              "strength": "strongest",
+              "image": "assets/images/kapi-now.jpg",
+              "alt": "A curly cream cockapoo in a pale blue sweater, looking up at the camera with big dark eyes.",
+              "reveal": "In his bed, still warm: a glossy print, curled from the printer. Kapi today, in a blue sweater, eyebrows up, asking a question. The paper is from this year. Nobody ever framed it.",
+              "boardLabel": "Photo: Kapi, now",
+              "collectMessage": "Kapi, now: a fresh print, never framed, hidden in his bed."
+            },
+            {
+              "id": "kapi_baby_photo",
+              "order": 1,
+              "label": "A faint trace by the couch",
+              "strength": "faint",
+              "image": "assets/images/kapi-baby.jpg",
+              "alt": "A cream cockapoo puppy in a black bow tie, paws resting on a wooden fence rail, a green garden blurred behind him.",
+              "reveal": "Nosed deep into the gap between the couch cushions: the puppy in the bow tie. Your left window. One corner is missing, and it fits the tooth mark exactly.",
+              "boardLabel": "Photo: Kapi, Day 1",
+              "collectMessage": "Kapi, Day 1: the bow-tie photo from your left window."
+            },
+            {
+              "id": "kapi_growing_photo",
+              "order": 2,
+              "label": "A stronger trail by the toy bin",
+              "strength": "stronger",
+              "image": "assets/images/kapi-growing.jpg",
+              "alt": "A fluffy apricot cockapoo, freshly groomed, held up in a pet shop and looking straight at the camera.",
+              "reveal": "Between a squeaky carrot and a rope toy gone grey: Kapi at one year, fresh from his first groom and clearly unimpressed. The missing photo from the album.",
+              "boardLabel": "Photo: Kapi, Year 1",
+              "collectMessage": "Kapi, Year 1: the missing album photo, in the toy bin."
+            }
+          ]
+        },
+        {
+          "id": "bow_tie",
+          "type": "drag",
+          "label": "The blanket in his bed",
+          "hint": "Click or press Space to pull it back",
+          "icon": "🎀",
+          "requires": "scent_trail",
+          "reveal": "Under the blanket: the black bow tie from his very first photo, kept for three years and chewed soft at one end. Kapi was not stealing. He was collecting every version of himself, in order.",
+          "collectible": true,
+          "boardLabel": "Bow tie from the first photo",
+          "collectMessage": "Kapi kept his first bow tie for three years."
+        }
+      ],
+      "exits": [
+        {
+          "label": "Back to the mantel, it is nearly dawn",
+          "target": "resolution",
+          "condition": "collected:bow_tie",
+          "lockedHint": "Kapi is still sniffing. The trail is not finished."
+        },
+        {
+          "label": "Back to the hallway fork",
+          "target": "choice",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "heights-num",
+      "step": 3,
+      "kicker": "Scene 4 · Following Num",
+      "title": "Above It All",
+      "theme": "theme-num",
+      "image": "assets/images/scenes/scene-num.jpg",
+      "alt": "A stock photo of a long-haired tabby cat lying flat on a wooden floor, staring into the camera.",
+      "caption": "Scene atmosphere only, not Kapi/Num",
+      "credit": { "photographer": "Inge Wallumrød", "url": "https://www.pexels.com/photo/silver-tabby-cat-lying-on-brown-wooden-surface-126407/" },
+      "narration": "You rise up into the world Num lives in: the tops of things, where nobody looks. From up here the house is a landscape of ledges, and every ledge has been walked tonight. Silver hairs mark the route like breadcrumbs only a cat would think to leave.",
+      "objects": [
+        {
+          "id": "num_kitty_photo",
+          "type": "hover-reveal",
+          "label": "The top of the fridge",
+          "hint": "Click or press Space to look",
+          "icon": "🧊",
+          "image": "assets/images/Num_kitty.jpg",
+          "alt": "A tiny fluffy grey kitten and an older tabby cat held up side by side in a kitchen, the person holding them hidden behind the cats.",
+          "reveal": "Behind the box of tea nobody drinks: the kitten held up like a prize. Your right window. Look at the background. It is this kitchen, this very fridge. She carried it home.",
+          "collectible": true,
+          "boardLabel": "Photo: Num, Day 1",
+          "collectMessage": "Num, Day 1: the kitten photo from your right window, on top of the fridge."
+        },
+        {
+          "id": "num_year_photo",
+          "type": "hover-reveal",
+          "label": "The dining table",
+          "hint": "Click or press Space to look",
+          "icon": "🌼",
+          "image": "assets/images/Num_1_year_old.jpg",
+          "alt": "A silver tabby cat asleep on a checked tea towel spread over a blue tablecloth printed with white daisies.",
+          "reveal": "Tucked under the daisy tablecloth: Num at one year, asleep on a folded tea towel, exactly where she is not allowed to sleep. The other missing photo from the album.",
+          "collectible": true,
+          "boardLabel": "Photo: Num, Year 1",
+          "collectMessage": "Num, Year 1: the missing album photo, under the tablecloth."
+        },
+        {
+          "id": "num_now_photo",
+          "type": "hover-reveal",
+          "label": "The printer",
+          "hint": "Click or press Space to look",
+          "icon": "🖨️",
+          "image": "assets/images/Num_2_years_old.jpg",
+          "alt": "A long-haired silver cat sitting upright on top of a printer, ears up, staring straight into the camera.",
+          "reveal": "On the output tray, curled and dusty: Num today, sitting on this exact printer and staring down the lens. Printed back in March. Never collected. Beside it, a clean rectangle in the dust where a second print used to be.",
+          "collectible": true,
+          "boardLabel": "Photo: Num, now",
+          "collectMessage": "Num, now: printed in March, forgotten on the printer tray."
+        },
+        {
+          "id": "silver_whisker",
+          "type": "drag",
+          "label": "The window curtain",
+          "hint": "Click or press Space to move it aside",
+          "icon": "✧",
+          "requires": ["num_kitty_photo", "num_year_photo", "num_now_photo"],
+          "reveal": "Behind the curtain, on the sill where Num watches the street: one silver whisker laid neatly beside one cream curl. Num was not hiding things. She was keeping watch while someone else did the carrying.",
+          "collectible": true,
+          "boardLabel": "A whisker beside a curl",
+          "collectMessage": "A silver whisker laid beside a cream curl on the windowsill."
+        }
+      ],
+      "exits": [
+        {
+          "label": "Back to the mantel, it is nearly dawn",
+          "target": "resolution",
+          "condition": "collected:silver_whisker",
+          "lockedHint": "Num is still staring at the curtain."
+        },
+        {
+          "label": "Back to the hallway fork",
+          "target": "choice",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "resolution",
+      "step": 4,
+      "kicker": "Scene 5 · 6:40 a.m.",
+      "title": "The Frame, Filled",
+      "theme": "theme-dawn",
+      "image": "assets/images/scenes/scene-dawn.jpg",
+      "alt": "Warm morning sunlight falling through a window across rumpled bedsheets.",
+      "credit": { "photographer": "Fabian Reck", "url": "https://www.pexels.com/photo/bright-sunlight-shining-through-window-on-a-messy-bed-17888969/" },
+      "motif": {
+        "image": "assets/images/scenes/motif-frame.jpg",
+        "alt": "",
+        "credit": { "photographer": "Monstera Production", "url": "https://www.pexels.com/photo/empty-white-frame-hanging-on-wall-with-patterns-6373517/" }
+      },
+      "narration": "Dawn comes in sideways through the blinds. You are back on the mantel, still empty, and the house is starting to stir. The couch cushions, the toy bin, the top of the fridge, the printer tray: every hiding place has been emptied in the night. Everything has been carried to one spot, the rug directly beneath you.",
+      "narrationByPath": {
+        "A": " You followed Kapi. You never saw what Num was doing up on the shelves, but you are about to.",
+        "B": " You followed Num. You never saw what Kapi was doing down on the floor, but you are about to."
+      },
+      "objects": [
+        {
+          "id": "the_note",
+          "type": "click-reveal",
+          "label": "A folded note under the frame",
+          "hint": "Click or press Space to unfold it",
+          "icon": "✉️",
+          "reveal": "Tucked under your bottom edge: a scrap of paper folded twice. In wobbly letters that look as if they took all night, it says: We grew up. Please update our picture. Underneath, two paw prints, one round and one small.",
+          "collectible": true,
+          "boardLabel": "The folded note",
+          "collectMessage": "A folded note with two paw prints. We grew up, please update our picture."
+        },
+        {
+          "id": "the_lineup",
+          "type": "click-reveal",
+          "label": "Whatever is on the rug",
+          "hint": "Click or press Space to look down",
+          "icon": "🖼️",
+          "requires": "the_note",
+          "reveal": "Six photographs in a crooked line across the rug, oldest to newest, nudged straight by a nose and a paw. At the end of the line: an empty space, exactly your size.",
+          "collectible": true,
+          "boardLabel": "The lineup on the rug",
+          "collectMessage": "Six photos lined up on the rug, oldest to newest, ending in a frame-shaped gap."
+        },
+        {
+          "id": "timeline",
+          "type": "timeline",
+          "label": "The lineup",
+          "requires": "the_lineup",
+          "interval": 900,
+          "items": [
+            { "image": "assets/images/kapi-baby.jpg", "alt": "Kapi as a puppy in a black bow tie.", "caption": "Kapi · Day 1" },
+            { "image": "assets/images/Num_kitty.jpg", "alt": "Num as a tiny grey kitten, held up beside an older tabby.", "caption": "Num · Day 1" },
+            { "image": "assets/images/kapi-growing.jpg", "alt": "Kapi at one year, freshly groomed.", "caption": "Kapi · Year 1" },
+            { "image": "assets/images/Num_1_year_old.jpg", "alt": "Num at one year, asleep on the tablecloth.", "caption": "Num · Year 1" },
+            { "image": "assets/images/kapi-now.jpg", "alt": "Kapi today in a blue sweater.", "caption": "Kapi · Now" },
+            { "image": "assets/images/Num_2_years_old.jpg", "alt": "Num today, sitting on the printer.", "caption": "Num · Now" }
+          ],
+          "finale": "Nothing was stolen. For three years you held two babies, and the babies grew up. The new photos were printed in March and forgotten on the printer. So tonight the two of them did it themselves: took down who they were, and laid out who they are. The case of the empty frame was never a theft. It was a request.",
+          "framed": [
+            { "image": "assets/images/kapi-now.jpg", "alt": "Kapi today, now in your left window." },
+            { "image": "assets/images/Num_2_years_old.jpg", "alt": "Num today, now in your right window." }
+          ],
+          "framedCaption": "Later that morning, someone finally took the hint."
+        },
+        {
+          "id": "both_sides",
+          "type": "click-reveal",
+          "label": "Both sides known",
+          "hint": "Click or press Space to read the last line",
+          "icon": "🔗",
+          "requires": ["timeline", "bow_tie", "silver_whisker"],
+          "lockedText": "This last line waits until you have followed both trails, low with Kapi and high with Num, and watched the lineup. Visit the other side of the story, then come back here.",
+          "reveal": "Now you have seen it both ways, low with Kapi and high with Num, and the request is complete. Update the frame, and let the new picture be the one they grew into: not two babies, but two friends, grown up together."
+        }
+      ],
+      "exits": [
+        {
+          "label": "See the other side: follow Num up high",
+          "target": "heights-num",
+          "condition": "path:A",
+          "hideWhenLocked": true
+        },
+        {
+          "label": "See the other side: follow Kapi down low",
+          "target": "trail-kapi",
+          "condition": "path:B",
+          "hideWhenLocked": true
+        },
+        {
+          "label": "Back to the hallway fork",
+          "target": "choice",
+          "condition": null
+        },
+        {
+          "label": "Close the case and start over",
+          "target": "entry",
+          "action": "reset",
+          "condition": "collected:the_lineup",
+          "lockedHint": "Read the note, then look down first."
+        }
+      ]
+    }
+  ]
+}
