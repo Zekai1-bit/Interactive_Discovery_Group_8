@@ -542,6 +542,23 @@ h3 {
   color: var(--accent);
 }
 
+.credits__list--refs {
+  list-style: none;
+  padding-left: 0;
+}
+
+.credits__list--refs li {
+  padding-left: 2em;
+  text-indent: -2em;
+}
+
+.credits__use {
+  display: block;
+  text-indent: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .drag-zone {
   position: relative;
   margin-top: 12px;
@@ -1556,7 +1573,10 @@ h3 {
   display: inline-flex;
   align-items: center;
   min-height: var(--tap);
+  max-width: 100%;
   padding: 0 6px;
+  overflow-wrap: anywhere;
+  text-indent: 0;
 }
 
 .skip-link {
